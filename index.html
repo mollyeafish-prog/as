@@ -2,12 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>영어 어순 배열 연습</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>영단어 시험</title>
 
   <style>
-
     *{
       margin:0;
       padding:0;
@@ -15,518 +13,204 @@
     }
 
     :root{
-
-      --bg-primary:#020617;
-      --bg-secondary:#0f172a;
-
-      --card-bg:rgba(15,23,42,0.82);
-      --card-border:rgba(255,255,255,0.08);
-
-      --text-main:#f8fafc;
-      --text-sub:#94a3b8;
-
-      --accent:#38bdf8;
-      --accent-hover:#0ea5e9;
-
+      --bg:#0f172a;
+      --card:#1e293b;
+      --main:#38bdf8;
+      --main-dark:#0ea5e9;
+      --text:#f8fafc;
+      --sub:#94a3b8;
       --success:#22c55e;
       --danger:#ef4444;
-
-      --word-bg:#334155;
-      --word-hover:#475569;
-
-      --radius-xl:2rem;
-      --radius-lg:1.25rem;
-      --radius-md:1rem;
-
-      --shadow:
-      0 1.5rem 3rem rgba(0,0,0,0.35);
-
     }
 
     body{
-
       min-height:100vh;
+      background:linear-gradient(135deg,#0f172a,#111827);
+      font-family:Pretendard, sans-serif;
+      color:var(--text);
 
       display:flex;
       justify-content:center;
       align-items:center;
 
       padding:4%;
-
-      overflow-x:hidden;
-
-      color:var(--text-main);
-
-      font-family:
-      "Pretendard",
-      "Noto Sans KR",
-      sans-serif;
-
-      background:
-      radial-gradient(circle at top,#1d4ed8 0%,transparent 25%),
-      linear-gradient(
-        135deg,
-        var(--bg-primary),
-        var(--bg-secondary)
-      );
-
-      transition:background .35s ease;
-
     }
 
     .container{
+      width:100%;
+      max-width:42rem;
 
-      width:min(100%,48rem);
+      background:rgba(30,41,59,0.95);
+      backdrop-filter:blur(0.8rem);
 
-      border-radius:var(--radius-xl);
+      border:0.1rem solid rgba(255,255,255,0.08);
 
-      background:var(--card-bg);
-
-      border:1px solid var(--card-border);
-
-      backdrop-filter:blur(1rem);
-
-      overflow:hidden;
-
-      box-shadow:var(--shadow);
-
-    }
-
-    .header{
-
+      border-radius:1.5rem;
       padding:6%;
 
-      border-bottom:1px solid rgba(255,255,255,0.06);
-
-      background:
-      linear-gradient(
-        to right,
-        rgba(30,41,59,0.7),
-        rgba(51,65,85,0.4)
-      );
-
+      box-shadow:
+      0 1rem 3rem rgba(0,0,0,0.35);
     }
 
     .title{
-
-      font-size:clamp(1.5rem,4vw,2.3rem);
-
+      text-align:center;
+      font-size:clamp(1.8rem,4vw,3rem);
       font-weight:700;
 
+      margin-bottom:8%;
+    }
+
+    .unit-select{
+      display:flex;
+      gap:3%;
+      margin-bottom:8%;
+    }
+
+    .unit-btn{
+      flex:1;
+
+      border:none;
+      border-radius:1rem;
+
+      padding:1rem 0;
+
+      background:#334155;
+      color:white;
+
+      font-size:1rem;
+      font-weight:600;
+
+      cursor:pointer;
+      transition:0.25s;
+    }
+
+    .unit-btn:hover{
+      background:var(--main);
+      transform:translateY(-0.2rem);
+    }
+
+    .question-box{
+      background:#0f172a;
+
+      border-radius:1.2rem;
+
+      padding:8%;
+      margin-bottom:6%;
+
       text-align:center;
-
-      letter-spacing:-0.03em;
-
     }
 
-    .content{
-
-      padding:6%;
-
+    .question-label{
+      color:var(--sub);
+      font-size:0.95rem;
+      margin-bottom:4%;
     }
 
-    .top-bar{
+    .question{
+      font-size:clamp(1.5rem,5vw,2.4rem);
+      font-weight:700;
+    }
+
+    .answer-input{
+      width:100%;
+
+      padding:1rem;
+
+      border:none;
+      border-radius:1rem;
+
+      outline:none;
+
+      background:#334155;
+      color:white;
+
+      font-size:1rem;
+
+      margin-bottom:5%;
+    }
+
+    .answer-input::placeholder{
+      color:#94a3b8;
+    }
+
+    .submit-btn{
+      width:100%;
+
+      padding:1rem;
+
+      border:none;
+      border-radius:1rem;
+
+      background:var(--main);
+      color:white;
+
+      font-size:1rem;
+      font-weight:700;
+
+      cursor:pointer;
+      transition:0.25s;
+    }
+
+    .submit-btn:hover{
+      background:var(--main-dark);
+    }
+
+    .info{
+      margin-top:6%;
 
       display:flex;
       justify-content:space-between;
       align-items:center;
 
-      margin-bottom:2rem;
+      color:var(--sub);
 
-    }
-
-    .progress-wrap{
-
-      display:flex;
-      align-items:flex-end;
-      gap:.4rem;
-
-    }
-
-    .progress{
-
-      font-size:clamp(2rem,6vw,3rem);
-      font-weight:800;
-
-      line-height:1;
-
-    }
-
-    .progress-total{
-
-      color:var(--text-sub);
-
-      margin-bottom:.35rem;
-
-    }
-
-    .score-box{
-
-      text-align:right;
-
-    }
-
-    .score-label{
-
-      color:var(--text-sub);
-
-      font-size:.9rem;
-
-      margin-bottom:.2rem;
-
-    }
-
-    .score{
-
-      font-size:clamp(1.5rem,5vw,2.2rem);
-
-      color:#67e8f9;
-
-      font-weight:700;
-
-    }
-
-    .question-box{
-
-      background:
-      rgba(30,41,59,0.72);
-
-      border:
-      1px solid rgba(255,255,255,0.05);
-
-      border-radius:var(--radius-lg);
-
-      padding:7%;
-
-      margin-bottom:2rem;
-
-    }
-
-    .question-label{
-
-      color:var(--text-sub);
-
-      font-size:.9rem;
-
-      margin-bottom:.8rem;
-
-    }
-
-    .question{
-
-      font-size:clamp(1.05rem,3vw,1.25rem);
-
-      line-height:1.8;
-
-      font-weight:500;
-
-    }
-
-    .section-title{
-
-      color:var(--text-sub);
-
-      font-size:.9rem;
-
-      margin-bottom:.8rem;
-
-      padding-left:.4rem;
-
-    }
-
-    .word-area{
-
-      min-height:8rem;
-
-      background:
-      rgba(2,6,23,0.72);
-
-      border:
-      0.12rem dashed rgba(148,163,184,0.4);
-
-      border-radius:var(--radius-lg);
-
-      padding:1.3rem;
-
-      display:flex;
-      flex-wrap:wrap;
-      align-content:flex-start;
-      gap:.8rem;
-
-      margin-bottom:1.5rem;
-
-    }
-
-    .word{
-
-      padding:
-      .85rem 1.3rem;
-
-      border-radius:999rem;
-
-      background:var(--word-bg);
-
-      border:
-      1px solid rgba(255,255,255,0.05);
-
-      cursor:pointer;
-
-      user-select:none;
-
-      font-size:.98rem;
-      font-weight:500;
-
-      transition:
-      transform .18s ease,
-      background .18s ease,
-      border-color .18s ease;
-
-    }
-
-    .word:hover{
-
-      transform:
-      translateY(-0.12rem);
-
-      background:
-      var(--word-hover);
-
-      border-color:
-      rgba(56,189,248,0.45);
-
-    }
-
-    .answer-word{
-
-      background:
-      rgba(71,85,105,0.95);
-
-    }
-
-    .hint-btn{
-
-      border:none;
-
-      background:
-      rgba(51,65,85,0.92);
-
-      color:#67e8f9;
-
-      padding:
-      .85rem 1.3rem;
-
-      border-radius:999rem;
-
-      cursor:pointer;
-
-      font-size:.95rem;
-
-      transition:
-      background .2s ease,
-      transform .2s ease;
-
-      margin-bottom:1.5rem;
-
-    }
-
-    .hint-btn:hover{
-
-      background:#475569;
-
-      transform:
-      translateY(-0.1rem);
-
+      font-size:0.95rem;
     }
 
     .result{
-
-      display:none;
-
-      border-radius:var(--radius-lg);
-
-      padding:1.5rem;
-
       text-align:center;
-
-      margin-bottom:1.5rem;
-
-      animation:fade .25s ease;
-
+      margin-top:5%;
+      font-weight:700;
+      min-height:1.5rem;
     }
 
     .correct{
-
-      background:
-      rgba(34,197,94,0.15);
-
-      border:
-      1px solid rgba(34,197,94,0.3);
-
-      color:#4ade80;
-
+      color:var(--success);
     }
 
     .wrong{
-
-      background:
-      rgba(239,68,68,0.14);
-
-      border:
-      1px solid rgba(239,68,68,0.3);
-
-      color:#fca5a5;
-
-      animation:
-      shake .4s ease;
-
+      color:var(--danger);
     }
 
-    .result-title{
-
-      font-size:1.7rem;
-      font-weight:800;
-
-      margin-bottom:.8rem;
-
-    }
-
-    .answer-text{
-
-      font-size:1rem;
-
-      line-height:1.7;
-
-      opacity:.95;
-
-    }
-
-    .buttons{
-
-      display:grid;
-
-      grid-template-columns:
-      repeat(2,1fr);
-
-      gap:1rem;
-
-    }
-
-    .btn{
-
-      border:none;
-
-      padding:1rem;
-
-      border-radius:var(--radius-md);
-
-      cursor:pointer;
-
-      font-size:1rem;
-      font-weight:600;
-
-      transition:
-      transform .18s ease,
-      opacity .18s ease;
-
-    }
-
-    .btn:hover{
-
-      transform:
-      translateY(-0.12rem);
-
-      opacity:.92;
-
-    }
-
-    .btn-reset{
+    .progress-wrap{
+      width:100%;
+      height:0.7rem;
 
       background:#334155;
-      color:white;
-
-    }
-
-    .btn-check{
-
-      background:var(--accent);
-      color:#082f49;
-
-    }
-
-    .progress-bar{
-
-      width:100%;
-      height:.7rem;
-
-      background:
-      rgba(51,65,85,0.7);
-
       border-radius:999rem;
 
       overflow:hidden;
 
-      margin-top:2rem;
-
+      margin-top:5%;
     }
 
-    .progress-fill{
-
+    .progress{
       width:0%;
       height:100%;
 
-      background:
-      linear-gradient(
-        90deg,
-        #38bdf8,
-        #0ea5e9
-      );
+      background:linear-gradient(90deg,#38bdf8,#0ea5e9);
 
-      transition:width .3s ease;
-
+      transition:0.3s;
     }
 
-    @keyframes fade{
+    @media(max-width:600px){
 
-      from{
-        opacity:0;
-        transform:translateY(.4rem);
+      .unit-select{
+        flex-direction:column;
       }
 
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-
-    }
-
-    @keyframes shake{
-
-      0%,100%{
-        transform:translateX(0);
-      }
-
-      25%{
-        transform:translateX(-0.4rem);
-      }
-
-      75%{
-        transform:translateX(0.4rem);
-      }
-
-    }
-
-    @media(max-width:700px){
-
-      .buttons{
-
-        grid-template-columns:1fr;
-
-      }
-
-      .top-bar{
-
-        gap:1rem;
-
+      .container{
+        padding:8%;
       }
 
     }
@@ -538,435 +222,171 @@
 
   <div class="container">
 
-    <div class="header">
-      <h1 class="title">영어 어순 배열 연습</h1>
+    <h1 class="title">영단어 시험</h1>
+
+    <div class="unit-select">
+      <button class="unit-btn" onclick="selectUnit(11)">11단원</button>
+      <button class="unit-btn" onclick="selectUnit(12)">12단원</button>
+      <button class="unit-btn" onclick="selectUnit(13)">13단원</button>
     </div>
 
-    <div class="content">
+    <div class="question-box">
+      <div class="question-label">뜻을 보고 영어 단어를 입력하세요</div>
+      <div class="question" id="question">단원을 선택하세요</div>
+    </div>
 
-      <div class="top-bar">
+    <input
+      type="text"
+      id="answer"
+      class="answer-input"
+      placeholder="정답 입력"
+    >
 
-        <div class="progress-wrap">
-          <div class="progress" id="progress">1</div>
-          <div class="progress-total">/ 10</div>
-        </div>
+    <button class="submit-btn" onclick="checkAnswer()">
+      정답 확인
+    </button>
 
-        <div class="score-box">
-          <div class="score-label">점수</div>
-          <div class="score" id="score">0</div>
-        </div>
+    <div class="result" id="result"></div>
 
-      </div>
+    <div class="info">
+      <span id="score">점수: 0</span>
+      <span id="count">0 / 0</span>
+    </div>
 
-      <div class="question-box">
-
-        <div class="question-label">
-          한국어 문장을 올바른 영어 어순으로 배열하세요
-        </div>
-
-        <div class="question" id="korean"></div>
-
-      </div>
-
-      <div class="section-title">답안 영역</div>
-
-      <div
-        class="word-area"
-        id="answerArea"
-      ></div>
-
-      <button
-        class="hint-btn"
-        onclick="showHint()"
-      >
-        힌트 보기
-      </button>
-
-      <div class="section-title">단어 선택</div>
-
-      <div
-        class="word-area"
-        id="wordBank"
-      ></div>
-
-      <div
-        class="result"
-        id="result"
-      ></div>
-
-      <div class="buttons">
-
-        <button
-          class="btn btn-reset"
-          onclick="resetAnswer()"
-        >
-          초기화
-        </button>
-
-        <button
-          class="btn btn-check"
-          onclick="checkAnswer()"
-        >
-          정답 확인
-        </button>
-
-      </div>
-
-      <div class="progress-bar">
-        <div
-          class="progress-fill"
-          id="progressFill"
-        ></div>
-      </div>
-
+    <div class="progress-wrap">
+      <div class="progress" id="progress"></div>
     </div>
 
   </div>
 
-<script>
+  <script>
 
-const questions = [
+    const words = {
 
-  {
+      11: [
+        { meaning:"환경", word:"environment" },
+        { meaning:"중요한", word:"important" },
+        { meaning:"발견하다", word:"discover" }
+      ],
 
-    korean:
-    "사회학자들은 이러한 과정을 '인종화'라고 부르기를 선호한다.",
+      12: [
+        { meaning:"기회", word:"opportunity" },
+        { meaning:"도전", word:"challenge" },
+        { meaning:"성공", word:"success" }
+      ],
 
-    words:[
-      { id:1, text:"Sociologists" },
-      { id:2, text:"prefer" },
-      { id:3, text:"to" },
-      { id:4, text:"call" },
-      { id:5, text:"these" },
-      { id:6, text:"processes" },
-      { id:7, text:"'racialization'." }
-    ]
+      13: [
+        { meaning:"기술", word:"technology" },
+        { meaning:"경험", word:"experience" },
+        { meaning:"발전하다", word:"develop" }
+      ]
 
-  },
+    };
 
-  {
+    let currentUnit = [];
+    let currentWord = {};
+    let score = 0;
+    let solved = 0;
 
-    korean:
-    "그녀는 매일 아침 학교에 걸어간다.",
+    function selectUnit(unit){
 
-    words:[
-      { id:1, text:"She" },
-      { id:2, text:"walks" },
-      { id:3, text:"to" },
-      { id:4, text:"school" },
-      { id:5, text:"every" },
-      { id:6, text:"morning." }
-    ]
+      currentUnit = [...words[unit]];
+      score = 0;
+      solved = 0;
 
-  }
+      updateInfo();
+      nextQuestion();
 
-];
+    }
 
-let currentQuestion = 0;
-let score = 0;
+    function nextQuestion(){
 
-let selected = [];
-let currentWords = [];
+      if(currentUnit.length === 0){
 
-function shuffle(array){
+        document.getElementById("question").innerText =
+          "시험 종료!";
 
-  return [...array].sort(
-    () => Math.random() - 0.5
-  );
+        document.getElementById("result").innerHTML =
+          `<span class="correct">최종 점수: ${score}</span>`;
 
-}
+        return;
+      }
 
-function loadQuestion(){
+      const randomIndex =
+        Math.floor(Math.random() * currentUnit.length);
 
-  const q = questions[currentQuestion];
+      currentWord = currentUnit[randomIndex];
 
-  currentWords = shuffle(q.words);
+      document.getElementById("question").innerText =
+        currentWord.meaning;
 
-  selected = [];
+      document.getElementById("answer").value = "";
+      document.getElementById("result").innerText = "";
 
-  document.getElementById("korean")
-  .textContent = q.korean;
+    }
 
-  document.getElementById("progress")
-  .textContent = currentQuestion + 1;
+    function checkAnswer(){
 
-  document.getElementById("score")
-  .textContent = score;
+      const input =
+        document.getElementById("answer")
+        .value
+        .trim()
+        .toLowerCase();
 
-  document.getElementById("result")
-  .style.display = "none";
+      const result =
+        document.getElementById("result");
 
-  updateProgressBar();
+      if(input === currentWord.word){
 
-  renderWordBank();
-  renderAnswerArea();
+        score++;
 
-}
-
-function renderWordBank(){
-
-  const bank =
-  document.getElementById("wordBank");
-
-  bank.innerHTML = "";
-
-  currentWords
-  .filter(
-    word =>
-    !selected.some(
-      item => item.id === word.id
-    )
-  )
-  .forEach(word => {
-
-    const div =
-    document.createElement("div");
-
-    div.className = "word";
-
-    div.textContent = word.text;
-
-    div.onclick =
-    () => selectWord(word);
-
-    bank.appendChild(div);
-
-  });
-
-}
-
-function renderAnswerArea(){
-
-  const area =
-  document.getElementById("answerArea");
-
-  area.innerHTML = "";
-
-  selected.forEach((word,index)=>{
-
-    const div =
-    document.createElement("div");
-
-    div.className =
-    "word answer-word";
-
-    div.textContent = word.text;
-
-    div.onclick =
-    () => removeWord(index);
-
-    area.appendChild(div);
-
-  });
-
-}
-
-function selectWord(word){
-
-  selected.push(word);
-
-  renderAnswerArea();
-  renderWordBank();
-
-}
-
-function removeWord(index){
-
-  selected.splice(index,1);
-
-  renderAnswerArea();
-  renderWordBank();
-
-}
-
-function showHint(){
-
-  selected =
-  [...questions[currentQuestion].words];
-
-  renderAnswerArea();
-  renderWordBank();
-
-}
-
-function checkAnswer(){
-
-  const correct =
-  questions[currentQuestion].words
-  .map(v=>v.text)
-  .join(" ");
-
-  const user =
-  selected
-  .map(v=>v.text)
-  .join(" ");
-
-  const result =
-  document.getElementById("result");
-
-  if(user === correct){
-
-    score += 10;
-
-    document.getElementById("score")
-    .textContent = score;
-
-    result.className =
-    "result correct";
-
-    result.innerHTML = `
-
-      <div class="result-title">
-        정답입니다!
-      </div>
-
-    `;
-
-    result.style.display = "block";
-
-    setTimeout(()=>{
-
-      if(
-        currentQuestion <
-        questions.length - 1
-      ){
-
-        currentQuestion++;
-
-        loadQuestion();
+        result.innerHTML =
+          `<span class="correct">정답!</span>`;
 
       }else{
 
-        showFinal();
+        result.innerHTML =
+          `<span class="wrong">
+            오답! 정답: ${currentWord.word}
+          </span>`;
 
       }
 
-    },1200);
+      currentUnit =
+        currentUnit.filter(
+          item => item.word !== currentWord.word
+        );
 
-  }else{
+      solved++;
 
-    document.body.style.background =
-    "#450a0a";
+      updateInfo();
 
-    setTimeout(()=>{
+      setTimeout(() => {
+        nextQuestion();
+      }, 1000);
 
-      document.body.style.background = `
-      radial-gradient(circle at top,#1d4ed8 0%,transparent 25%),
-      linear-gradient(135deg,#020617,#0f172a)
-      `;
+    }
 
-    },450);
+    function updateInfo(){
 
-    result.className =
-    "result wrong";
+      document.getElementById("score").innerText =
+        `점수: ${score}`;
 
-    result.innerHTML = `
+      document.getElementById("count").innerText =
+        `${solved} / ${solved + currentUnit.length}`;
 
-      <div class="result-title">
-        틀렸습니다
-      </div>
+      const total =
+        solved + currentUnit.length;
 
-      <div class="answer-text">
-        정답:<br>
-        ${correct}
-      </div>
+      const percent =
+        total === 0 ? 100 : (solved / total) * 100;
 
-    `;
+      document.getElementById("progress").style.width =
+        percent + "%";
 
-    result.style.display = "block";
+    }
 
-  }
-
-}
-
-function updateProgressBar(){
-
-  const percent =
-  ((currentQuestion) /
-  questions.length) * 100;
-
-  document.getElementById("progressFill")
-  .style.width = percent + "%";
-
-}
-
-function resetAnswer(){
-
-  selected = [];
-
-  renderAnswerArea();
-  renderWordBank();
-
-}
-
-function showFinal(){
-
-  document.querySelector(".content")
-  .innerHTML = `
-
-    <div
-      style="
-      text-align:center;
-      padding:8% 4%;
-      "
-    >
-
-      <div
-        style="
-        font-size:3rem;
-        margin-bottom:1rem;
-        "
-      >
-        🎉
-      </div>
-
-      <h2
-        style="
-        font-size:2rem;
-        margin-bottom:1rem;
-        "
-      >
-        시험 완료
-      </h2>
-
-      <p
-        style="
-        color:#94a3b8;
-        margin-bottom:2rem;
-        "
-      >
-        최종 점수
-      </p>
-
-      <div
-        style="
-        font-size:4rem;
-        font-weight:800;
-        color:#67e8f9;
-        "
-      >
-        ${score}
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-document.addEventListener("keydown",e=>{
-
-  if(e.key === "Enter"){
-
-    checkAnswer();
-
-  }
-
-});
-
-loadQuestion();
-
-</script>
+  </script>
 
 </body>
 </html>
