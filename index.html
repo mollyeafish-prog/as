@@ -225,9 +225,9 @@
     <h1 class="title">영단어 시험</h1>
 
     <div class="unit-select">
-      <button class="unit-btn" onclick="selectUnit(11)">11단원</button>
-      <button class="unit-btn" onclick="selectUnit(12)">12단원</button>
-      <button class="unit-btn" onclick="selectUnit(13)">13단원</button>
+      <button class="unit-btn" onclick="selectUnit(11)">11</button>
+      <button class="unit-btn" onclick="selectUnit(12)">12</button>
+      <button class="unit-btn" onclick="selectUnit(13)">13</button>
     </div>
 
     <div class="question-box">
@@ -264,21 +264,172 @@
     const words = {
 
       11: [
-        { meaning:"환경", word:"environment" },
-        { meaning:"중요한", word:"important" },
-        { meaning:"발견하다", word:"discover" }
+  // 01
+  { meaning:"적용", word:"application" },
+  { meaning:"은유", word:"metaphor" },
+  { meaning:"도회지의, 도시의", word:"urban" },
+  { meaning:"맡기다, 할당하다", word:"assign" },
+  { meaning:"찾다", word:"locate" },
+  { meaning:"비유", word:"comparison" },
+  { meaning:"결론", word:"conclusion" },
+  { meaning:"말하다, 언급하다", word:"mention" },
+  { meaning:"그 시점부터 나아가", word:"from that point on" },
+  { meaning:"형식", word:"format" },
+
+  // 02
+  { meaning:"개혁주의적인", word:"reformist" },
+  { meaning:"(~을 중심으로) 움직이다, 회전하다", word:"rotate" },
+  { meaning:"금전적인", word:"monetary" },
+  { meaning:"계산", word:"calculation" },
+  { meaning:"사고하다", word:"reason" },
+  { meaning:"주변화하다", word:"marginalise" },
+  { meaning:"전통적인", word:"conventional" },
+  { meaning:"소매업체", word:"retailer" },
+  { meaning:"이주한; 이주민", word:"migrant" },
+  { meaning:"운송하다", word:"transport" },
+  { meaning:"생태적으로", word:"ecologically" },
+  { meaning:"수반하다, 의미하다", word:"entail" },
+  { meaning:"부각[강조]하다", word:"highlight" },
+
+  // 03
+  { meaning:"유전적으로", word:"genetically" },
+  { meaning:"변이, 차이", word:"variation" },
+  { meaning:"~ 사이에, ~ 간에", word:"amongst" },
+  { meaning:"깔끔한", word:"neat" },
+  { meaning:"경계(선)", word:"boundary" },
+  { meaning:"뚜렷한, 명백한", word:"distinct" },
+  { meaning:"사회학자", word:"sociologist" },
+  { meaning:"인종화", word:"racialization" },
+  { meaning:"설명, 기술", word:"account" },
+  { meaning:"차이를 낳다, 차별을 두다", word:"make a difference" },
+  { meaning:"~이라는 측면[견지]에서", word:"in terms of" },
+  { meaning:"문명화된", word:"civilized" },
+
+  // 04
+  { meaning:"허리둘레", word:"waistline" },
+  { meaning:"간과하다", word:"overlook" },
+  { meaning:"발생률", word:"incidence" },
+  { meaning:"비만", word:"obesity" },
+  { meaning:"나란히", word:"in parallel" },
+  { meaning:"1인분(의 양)", word:"portion size" },
+  { meaning:"우연", word:"coincidence" },
+  { meaning:"마주하다, 직면하다", word:"confront" },
+  { meaning:"인식", word:"perception" },
+  { meaning:"왜곡", word:"distortion" },
+  { meaning:"일관되게", word:"consistently" },
+  { meaning:"의도하지 않게", word:"unintentionally" },
+  { meaning:"과잉의, 플러스의", word:"positive" },
+  { meaning:"궁극적으로", word:"ultimately" }
       ],
 
       12: [
-        { meaning:"기회", word:"opportunity" },
-        { meaning:"도전", word:"challenge" },
-        { meaning:"성공", word:"success" }
+  // 01
+  { meaning:"도덕적인", word:"moral" },
+  { meaning:"분노", word:"outrage" },
+  { meaning:"목격하다", word:"witness" },
+  { meaning:"구현하다, 나타내다", word:"embody" },
+  { meaning:"~을 갈망하다", word:"thirst for" },
+  { meaning:"비합리성", word:"irrationality" },
+  { meaning:"일시적으로", word:"momentarily" },
+  { meaning:"협력적인", word:"cooperative" },
+
+  // 02
+  { meaning:"비생산적인, 역효과의", word:"counterproductive" },
+  { meaning:"본능, 직감", word:"instinct" },
+  { meaning:"가능성", word:"potential" },
+  { meaning:"유전자", word:"gene" },
+  { meaning:"진화의", word:"evolutionary" },
+  { meaning:"~에 의존하다", word:"rely upon" },
+  { meaning:"영양적 가치가 있는, 영양상의", word:"nutritional" },
+  { meaning:"약효가 있는", word:"medicinal" },
+  { meaning:"독(성)이 있는", word:"poisonous" },
+  { meaning:"알약, 정제", word:"pill" },
+  { meaning:"(혼합물의) 성분, 원료", word:"ingredient" },
+  { meaning:"치료(약)", word:"remedy" },
+  { meaning:"여기다, 인식하다", word:"perceive" },
+  { meaning:"인공적인", word:"artificial" },
+
+  // 03
+  { meaning:"식이 보충제", word:"dietary supplement" },
+  { meaning:"진단하다", word:"diagnose" },
+  { meaning:"거치다, 겪다", word:"undergo" },
+  { meaning:"효과, 효율성", word:"effectiveness" },
+  { meaning:"물질", word:"substance" },
+  { meaning:"복용시키다", word:"dose" },
+  { meaning:"승인", word:"approval" },
+  { meaning:"이후에", word:"subsequently" },
+  { meaning:"권한", word:"authority" },
+  { meaning:"평가하다", word:"evaluate" },
+  { meaning:"(의회) 의원, 입법자", word:"legislator" },
+  { meaning:"목적", word:"objective" },
+  { meaning:"잠재적으로", word:"potentially" },
+  { meaning:"부작용", word:"side effect" },
+
+  // 04
+  { meaning:"일회용의", word:"disposable" },
+  { meaning:"~과는 달리, ~이 아니라", word:"as opposed to" },
+  { meaning:"재평가하다", word:"reassess" },
+  { meaning:"의의, 의미, 중요성", word:"significance" },
+  { meaning:"관점", word:"perspective" },
+  { meaning:"~을 다시 시작하다", word:"take up" },
+  { meaning:"반영하다", word:"reflect" },
+  { meaning:"인식", word:"perception" },
+  { meaning:"존재론적인", word:"existential" },
+  { meaning:"활성화하다", word:"activate" },
+  { meaning:"분석", word:"analysis" }
       ],
 
       13: [
-        { meaning:"기술", word:"technology" },
-        { meaning:"경험", word:"experience" },
-        { meaning:"발전하다", word:"develop" }
+  // 01
+  { meaning:"~을 위해", word:"for the sake of" },
+  { meaning:"설명", word:"account" },
+  { meaning:"응축하다", word:"condense" },
+  { meaning:"다루다", word:"address" },
+  { meaning:"규칙성", word:"regularity" },
+  { meaning:"날카로움", word:"sharpness" },
+  { meaning:"(우연의) 일치에 의한", word:"coincidental" },
+  { meaning:"배열", word:"arrangement" },
+  { meaning:"부수다", word:"crush" },
+
+  // 02
+  { meaning:"생성기", word:"generator" },
+  { meaning:"브레인스토밍하다", word:"brainstorm" },
+  { meaning:"변형, 변이", word:"variation" },
+  { meaning:"확률, 가능성", word:"odds" },
+  { meaning:"확인하다", word:"confirm" },
+  { meaning:"가르다, 구분하다", word:"distinguish" },
+
+  // 03
+  { meaning:"내적인, 내부의", word:"internal" },
+  { meaning:"감각", word:"sensation" },
+  { meaning:"기능", word:"faculty" },
+  { meaning:"해석하다", word:"interpret" },
+  { meaning:"생기게 하다, 생산하다", word:"yield" },
+  { meaning:"냉담하게", word:"coolly" },
+  { meaning:"(감정 등이) 일어나다", word:"stir" },
+  { meaning:"중요한", word:"critical" },
+  { meaning:"미묘하게", word:"subtly" },
+  { meaning:"무의식적으로", word:"unconsciously" },
+  { meaning:"자세", word:"posture" },
+  { meaning:"목소리의", word:"vocal" },
+  { meaning:"소리의 높낮이", word:"pitch" },
+  { meaning:"~을 통하여", word:"via" },
+  { meaning:"인식하다", word:"perceive" },
+  { meaning:"승선한", word:"onboard" },
+  { meaning:"~을 한 입 베어 물다", word:"take a bite off" },
+  { meaning:"이어버드(귀 안에 넣는 이어폰)", word:"earbud" },
+
+  // 04
+  { meaning:"비판", word:"criticism" },
+  { meaning:"과도한 확장", word:"overextension" },
+  { meaning:"관련되다", word:"involve" },
+  { meaning:"비인간화", word:"dehumanization" },
+  { meaning:"기본적으로, 주로", word:"primarily" },
+  { meaning:"비판적인", word:"critical" },
+  { meaning:"경고하다", word:"caution" },
+  { meaning:"위성 위치 확인 시스템", word:"GPS" },
+  { meaning:"능력", word:"faculty" }
+
       ]
 
     };
