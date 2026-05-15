@@ -1,378 +1,972 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>sdfghjk</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>영어 어순 배열 연습</title>
+
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
-      color: #e2e8f0;
-      min-height: 100vh;
-      margin: 0;
-      padding: 40px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.6s;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    .container {
-      width: 100%;
-      max-width: 640px;
-      background: #111827;
-      border-radius: 28px;
-      border: 1px solid #334155;
-      overflow: hidden;
-      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+    :root{
+
+      --bg-primary:#020617;
+      --bg-secondary:#0f172a;
+
+      --card-bg:rgba(15,23,42,0.82);
+      --card-border:rgba(255,255,255,0.08);
+
+      --text-main:#f8fafc;
+      --text-sub:#94a3b8;
+
+      --accent:#38bdf8;
+      --accent-hover:#0ea5e9;
+
+      --success:#22c55e;
+      --danger:#ef4444;
+
+      --word-bg:#334155;
+      --word-hover:#475569;
+
+      --radius-xl:2rem;
+      --radius-lg:1.25rem;
+      --radius-md:1rem;
+
+      --shadow:
+      0 1.5rem 3rem rgba(0,0,0,0.35);
+
     }
 
-    header {
-      background: linear-gradient(to right, #1e2937, #334155);
-      padding: 32px 40px;
-      text-align: center;
+    body{
+
+      min-height:100vh;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      padding:4%;
+
+      overflow-x:hidden;
+
+      color:var(--text-main);
+
+      font-family:
+      "Pretendard",
+      "Noto Sans KR",
+      sans-serif;
+
+      background:
+      radial-gradient(circle at top,#1d4ed8 0%,transparent 25%),
+      linear-gradient(
+        135deg,
+        var(--bg-primary),
+        var(--bg-secondary)
+      );
+
+      transition:background .35s ease;
+
     }
 
-    header h1 {
-      font-size: 1.65rem;
-      font-weight: 600;
-      margin: 0;
+    .container{
+
+      width:min(100%,48rem);
+
+      border-radius:var(--radius-xl);
+
+      background:var(--card-bg);
+
+      border:1px solid var(--card-border);
+
+      backdrop-filter:blur(1rem);
+
+      overflow:hidden;
+
+      box-shadow:var(--shadow);
+
     }
 
-    .content { padding: 40px; }
+    .header{
 
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
+      padding:6%;
+
+      border-bottom:1px solid rgba(255,255,255,0.06);
+
+      background:
+      linear-gradient(
+        to right,
+        rgba(30,41,59,0.7),
+        rgba(51,65,85,0.4)
+      );
+
     }
 
-    .progress { font-size: 2.8rem; font-weight: 700; color: #f8fafc; }
-    .score-box { text-align: right; }
-    .score-label { font-size: 0.8rem; color: #94a3b8; }
-    .score { font-size: 1.9rem; font-weight: 600; color: #34d399; }
+    .title{
 
-    #korean {
-      background: #1e2937;
-      border-radius: 20px;
-      padding: 32px;
-      font-size: 1.15rem;
-      line-height: 1.65;
-      margin-bottom: 36px;
-      border: 1px solid #475569;
+      font-size:clamp(1.5rem,4vw,2.3rem);
+
+      font-weight:700;
+
+      text-align:center;
+
+      letter-spacing:-0.03em;
+
     }
 
-    .section-label {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #94a3b8;
-      margin-bottom: 10px;
-      padding-left: 8px;
+    .content{
+
+      padding:6%;
+
     }
 
-    #answerArea, #wordBank {
-      background: #0f172a;
-      border: 2px dashed #64748b;
-      border-radius: 20px;
-      padding: 24px;
-      min-height: 130px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-content: flex-start;
+    .top-bar{
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      margin-bottom:2rem;
+
     }
 
-    .word {
-      background: #334155;
-      color: #f1f5f9;
-      padding: 13px 24px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.2s;
-      white-space: nowrap;
+    .progress-wrap{
+
+      display:flex;
+      align-items:flex-end;
+      gap:.4rem;
+
     }
 
-    .word:hover { background: #475569; transform: translateY(-2px); }
-    #answerArea .word { background: #475569; }
+    .progress{
 
-    .hint-btn {
-      background: #334155;
-      color: #67e8f9;
-      border: 1px solid #475569;
-      padding: 10px 20px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      margin-bottom: 20px;
+      font-size:clamp(2rem,6vw,3rem);
+      font-weight:800;
+
+      line-height:1;
+
     }
 
-    .result {
-      margin: 25px 0;
-      padding: 30px 20px;
-      border-radius: 20px;
-      font-size: 2.2rem;
-      font-weight: 700;
-      text-align: center;
-      display: none;
-      line-height: 1.3;
+    .progress-total{
+
+      color:var(--text-sub);
+
+      margin-bottom:.35rem;
+
     }
 
-    .correct { background: #14532d; color: #4ade80; }
-    .wrong   { 
-      background: #991b1b; 
-      color: #fecaca; 
-      font-size: 2.5rem;
-      animation: shake 0.5s;
+    .score-box{
+
+      text-align:right;
+
     }
 
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-8px); }
-      75% { transform: translateX(8px); }
+    .score-label{
+
+      color:var(--text-sub);
+
+      font-size:.9rem;
+
+      margin-bottom:.2rem;
+
     }
 
-    .buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 10px;
+    .score{
+
+      font-size:clamp(1.5rem,5vw,2.2rem);
+
+      color:#67e8f9;
+
+      font-weight:700;
+
     }
 
-    button {
-      padding: 18px;
-      font-size: 1.1rem;
-      font-weight: 500;
-      border-radius: 18px;
-      cursor: pointer;
-      transition: all 0.2s;
+    .question-box{
+
+      background:
+      rgba(30,41,59,0.72);
+
+      border:
+      1px solid rgba(255,255,255,0.05);
+
+      border-radius:var(--radius-lg);
+
+      padding:7%;
+
+      margin-bottom:2rem;
+
     }
 
-    .btn-reset {
-      background: #334155;
-      color: white;
-      border: 1px solid #475569;
+    .question-label{
+
+      color:var(--text-sub);
+
+      font-size:.9rem;
+
+      margin-bottom:.8rem;
+
     }
 
-    .btn-check {
-      background: #22d3ee;
-      color: #0f172a;
-      font-weight: 600;
+    .question{
+
+      font-size:clamp(1.05rem,3vw,1.25rem);
+
+      line-height:1.8;
+
+      font-weight:500;
+
     }
+
+    .section-title{
+
+      color:var(--text-sub);
+
+      font-size:.9rem;
+
+      margin-bottom:.8rem;
+
+      padding-left:.4rem;
+
+    }
+
+    .word-area{
+
+      min-height:8rem;
+
+      background:
+      rgba(2,6,23,0.72);
+
+      border:
+      0.12rem dashed rgba(148,163,184,0.4);
+
+      border-radius:var(--radius-lg);
+
+      padding:1.3rem;
+
+      display:flex;
+      flex-wrap:wrap;
+      align-content:flex-start;
+      gap:.8rem;
+
+      margin-bottom:1.5rem;
+
+    }
+
+    .word{
+
+      padding:
+      .85rem 1.3rem;
+
+      border-radius:999rem;
+
+      background:var(--word-bg);
+
+      border:
+      1px solid rgba(255,255,255,0.05);
+
+      cursor:pointer;
+
+      user-select:none;
+
+      font-size:.98rem;
+      font-weight:500;
+
+      transition:
+      transform .18s ease,
+      background .18s ease,
+      border-color .18s ease;
+
+    }
+
+    .word:hover{
+
+      transform:
+      translateY(-0.12rem);
+
+      background:
+      var(--word-hover);
+
+      border-color:
+      rgba(56,189,248,0.45);
+
+    }
+
+    .answer-word{
+
+      background:
+      rgba(71,85,105,0.95);
+
+    }
+
+    .hint-btn{
+
+      border:none;
+
+      background:
+      rgba(51,65,85,0.92);
+
+      color:#67e8f9;
+
+      padding:
+      .85rem 1.3rem;
+
+      border-radius:999rem;
+
+      cursor:pointer;
+
+      font-size:.95rem;
+
+      transition:
+      background .2s ease,
+      transform .2s ease;
+
+      margin-bottom:1.5rem;
+
+    }
+
+    .hint-btn:hover{
+
+      background:#475569;
+
+      transform:
+      translateY(-0.1rem);
+
+    }
+
+    .result{
+
+      display:none;
+
+      border-radius:var(--radius-lg);
+
+      padding:1.5rem;
+
+      text-align:center;
+
+      margin-bottom:1.5rem;
+
+      animation:fade .25s ease;
+
+    }
+
+    .correct{
+
+      background:
+      rgba(34,197,94,0.15);
+
+      border:
+      1px solid rgba(34,197,94,0.3);
+
+      color:#4ade80;
+
+    }
+
+    .wrong{
+
+      background:
+      rgba(239,68,68,0.14);
+
+      border:
+      1px solid rgba(239,68,68,0.3);
+
+      color:#fca5a5;
+
+      animation:
+      shake .4s ease;
+
+    }
+
+    .result-title{
+
+      font-size:1.7rem;
+      font-weight:800;
+
+      margin-bottom:.8rem;
+
+    }
+
+    .answer-text{
+
+      font-size:1rem;
+
+      line-height:1.7;
+
+      opacity:.95;
+
+    }
+
+    .buttons{
+
+      display:grid;
+
+      grid-template-columns:
+      repeat(2,1fr);
+
+      gap:1rem;
+
+    }
+
+    .btn{
+
+      border:none;
+
+      padding:1rem;
+
+      border-radius:var(--radius-md);
+
+      cursor:pointer;
+
+      font-size:1rem;
+      font-weight:600;
+
+      transition:
+      transform .18s ease,
+      opacity .18s ease;
+
+    }
+
+    .btn:hover{
+
+      transform:
+      translateY(-0.12rem);
+
+      opacity:.92;
+
+    }
+
+    .btn-reset{
+
+      background:#334155;
+      color:white;
+
+    }
+
+    .btn-check{
+
+      background:var(--accent);
+      color:#082f49;
+
+    }
+
+    .progress-bar{
+
+      width:100%;
+      height:.7rem;
+
+      background:
+      rgba(51,65,85,0.7);
+
+      border-radius:999rem;
+
+      overflow:hidden;
+
+      margin-top:2rem;
+
+    }
+
+    .progress-fill{
+
+      width:0%;
+      height:100%;
+
+      background:
+      linear-gradient(
+        90deg,
+        #38bdf8,
+        #0ea5e9
+      );
+
+      transition:width .3s ease;
+
+    }
+
+    @keyframes fade{
+
+      from{
+        opacity:0;
+        transform:translateY(.4rem);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
+    }
+
+    @keyframes shake{
+
+      0%,100%{
+        transform:translateX(0);
+      }
+
+      25%{
+        transform:translateX(-0.4rem);
+      }
+
+      75%{
+        transform:translateX(0.4rem);
+      }
+
+    }
+
+    @media(max-width:700px){
+
+      .buttons{
+
+        grid-template-columns:1fr;
+
+      }
+
+      .top-bar{
+
+        gap:1rem;
+
+      }
+
+    }
+
   </style>
 </head>
+
 <body>
 
-<div class="container">
-  <header><h1>영어 어순 배열 연습</h1></header>
+  <div class="container">
 
-  <div class="content">
-    <div class="top-bar">
-      <div>
-        <span class="progress" id="progress">1</span>
-        <small style="color:#64748b;"> / 10</small>
-      </div>
-      <div class="score-box">
-        <div class="score-label">점수</div>
-        <div class="score" id="score">0</div>
-      </div>
+    <div class="header">
+      <h1 class="title">영어 어순 배열 연습</h1>
     </div>
 
-    <div id="korean"></div>
+    <div class="content">
 
-    <div class="section-label">답안 영역</div>
-    <div id="answerArea"></div>
+      <div class="top-bar">
 
-    <button class="hint-btn" onclick="showHint()">힌트 보기</button>
+        <div class="progress-wrap">
+          <div class="progress" id="progress">1</div>
+          <div class="progress-total">/ 10</div>
+        </div>
 
-    <div class="section-label">단어 선택</div>
-    <div id="wordBank"></div>
+        <div class="score-box">
+          <div class="score-label">점수</div>
+          <div class="score" id="score">0</div>
+        </div>
 
-    <div id="result" class="result"></div>
+      </div>
 
-    <div class="buttons">
-      <button class="btn-reset" onclick="resetAnswer()">초기화</button>
-      <button class="btn-check" onclick="checkAnswer()">확인하기</button>
+      <div class="question-box">
+
+        <div class="question-label">
+          한국어 문장을 올바른 영어 어순으로 배열하세요
+        </div>
+
+        <div class="question" id="korean"></div>
+
+      </div>
+
+      <div class="section-title">답안 영역</div>
+
+      <div
+        class="word-area"
+        id="answerArea"
+      ></div>
+
+      <button
+        class="hint-btn"
+        onclick="showHint()"
+      >
+        힌트 보기
+      </button>
+
+      <div class="section-title">단어 선택</div>
+
+      <div
+        class="word-area"
+        id="wordBank"
+      ></div>
+
+      <div
+        class="result"
+        id="result"
+      ></div>
+
+      <div class="buttons">
+
+        <button
+          class="btn btn-reset"
+          onclick="resetAnswer()"
+        >
+          초기화
+        </button>
+
+        <button
+          class="btn btn-check"
+          onclick="checkAnswer()"
+        >
+          정답 확인
+        </button>
+
+      </div>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          id="progressFill"
+        ></div>
+      </div>
+
     </div>
+
   </div>
-</div>
-
-<canvas id="confetti" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; display: none;"></canvas>
 
 <script>
-// Confetti 함수 (기존과 동일)
-function launchConfetti() {
-  const canvas = document.getElementById('confetti');
-  canvas.style.display = 'block';
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
 
-  const colors = ['#f87171', '#fb923c', '#fbbf24', '#a78bfa', '#67e8f9'];
-  let particles = [];
+const questions = [
 
-  class Particle {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height - canvas.height;
-      this.size = Math.random() * 12 + 8;
-      this.speed = Math.random() * 7 + 5;
-      this.angle = Math.random() * 360;
-      this.color = colors[Math.floor(Math.random() * colors.length)];
-    }
-    update() { this.y += this.speed; this.angle += 6; }
-    draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.angle * Math.PI / 180);
-      ctx.fillStyle = this.color;
-      ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
-      ctx.restore();
-    }
+  {
+
+    korean:
+    "사회학자들은 이러한 과정을 '인종화'라고 부르기를 선호한다.",
+
+    words:[
+      { id:1, text:"Sociologists" },
+      { id:2, text:"prefer" },
+      { id:3, text:"to" },
+      { id:4, text:"call" },
+      { id:5, text:"these" },
+      { id:6, text:"processes" },
+      { id:7, text:"'racialization'." }
+    ]
+
+  },
+
+  {
+
+    korean:
+    "그녀는 매일 아침 학교에 걸어간다.",
+
+    words:[
+      { id:1, text:"She" },
+      { id:2, text:"walks" },
+      { id:3, text:"to" },
+      { id:4, text:"school" },
+      { id:5, text:"every" },
+      { id:6, text:"morning." }
+    ]
+
   }
 
-  for (let i = 0; i < 180; i++) particles.push(new Particle());
+];
 
-  let animation = setInterval(() => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((p, i) => {
-      p.update();
-      p.draw();
-      if (p.y > canvas.height) particles.splice(i, 1);
-    });
-    if (particles.length === 0) {
-      clearInterval(animation);
-      canvas.style.display = 'none';
-    }
-  }, 20);
-}
-
-// ================== 문제 데이터 ==================
 let currentQuestion = 0;
 let score = 0;
 
-const questions = [
-  {
-    korean: "사회학자들은 이러한 과정을 '인종화'라고 부르기를 선호한다.",
-    words: ["Sociologists", "prefer", "to", "call", "these", "processes", "'racialization'."],
-    correct: ["Sociologists", "prefer", "to", "call", "these", "processes", "'racialization'."]
-  }
-];
-
 let selected = [];
-let originalWords = [];
+let currentWords = [];
 
-// ================== 메인 함수 ==================
-function loadQuestion() {
+function shuffle(array){
+
+  return [...array].sort(
+    () => Math.random() - 0.5
+  );
+
+}
+
+function loadQuestion(){
+
   const q = questions[currentQuestion];
-  originalWords = [...q.words];
-  
-  // 배경 원래대로 복구
-  document.body.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e2937 100%)';
 
-  document.getElementById('progress').textContent = currentQuestion + 1;
-  document.getElementById('score').textContent = score;
-  document.getElementById('korean').textContent = q.korean;
-  document.getElementById('result').style.display = 'none';
+  currentWords = shuffle(q.words);
 
   selected = [];
+
+  document.getElementById("korean")
+  .textContent = q.korean;
+
+  document.getElementById("progress")
+  .textContent = currentQuestion + 1;
+
+  document.getElementById("score")
+  .textContent = score;
+
+  document.getElementById("result")
+  .style.display = "none";
+
+  updateProgressBar();
+
   renderWordBank();
-  updateAnswerArea();
+  renderAnswerArea();
+
 }
 
-function renderWordBank() { /* ... 기존과 동일 ... */ 
-  const bank = document.getElementById('wordBank');
-  bank.innerHTML = '';
-  const remaining = originalWords.filter(w => !selected.includes(w));
-  remaining.forEach(word => {
-    const div = document.createElement('div');
-    div.className = 'word';
-    div.textContent = word;
-    div.onclick = () => selectWord(word);
+function renderWordBank(){
+
+  const bank =
+  document.getElementById("wordBank");
+
+  bank.innerHTML = "";
+
+  currentWords
+  .filter(
+    word =>
+    !selected.some(
+      item => item.id === word.id
+    )
+  )
+  .forEach(word => {
+
+    const div =
+    document.createElement("div");
+
+    div.className = "word";
+
+    div.textContent = word.text;
+
+    div.onclick =
+    () => selectWord(word);
+
     bank.appendChild(div);
+
   });
+
 }
 
-function selectWord(word) {
-  if (!selected.includes(word)) {
-    selected.push(word);
-    updateAnswerArea();
-    renderWordBank();
-  }
-}
+function renderAnswerArea(){
 
-function updateAnswerArea() { /* 기존과 동일 */ 
-  const area = document.getElementById('answerArea');
-  area.innerHTML = '';
-  selected.forEach((word, i) => {
-    const div = document.createElement('div');
-    div.className = 'word';
-    div.textContent = word;
-    div.onclick = () => removeWord(i);
+  const area =
+  document.getElementById("answerArea");
+
+  area.innerHTML = "";
+
+  selected.forEach((word,index)=>{
+
+    const div =
+    document.createElement("div");
+
+    div.className =
+    "word answer-word";
+
+    div.textContent = word.text;
+
+    div.onclick =
+    () => removeWord(index);
+
     area.appendChild(div);
+
   });
+
 }
 
-function removeWord(index) {
-  selected.splice(index, 1);
-  updateAnswerArea();
+function selectWord(word){
+
+  selected.push(word);
+
+  renderAnswerArea();
   renderWordBank();
+
 }
 
-function showHint() {
-  const area = document.getElementById('answerArea');
-  area.innerHTML = '';
-  questions[currentQuestion].correct.forEach((word, i) => {
-    const div = document.createElement('div');
-    div.className = 'word';
-    div.style.background = '#1e40af';
-    div.style.color = '#bfdbfe';
-    div.textContent = `${i+1}. ${word}`;
-    area.appendChild(div);
-  });
+function removeWord(index){
+
+  selected.splice(index,1);
+
+  renderAnswerArea();
+  renderWordBank();
+
 }
 
-function checkAnswer() {
-  const q = questions[currentQuestion];
-  const userAnswer = selected.join(" ");
-  const correctAnswer = q.correct.join(" ");
-  const resultEl = document.getElementById('result');
+function showHint(){
 
-  if (userAnswer === correctAnswer) {
+  selected =
+  [...questions[currentQuestion].words];
+
+  renderAnswerArea();
+  renderWordBank();
+
+}
+
+function checkAnswer(){
+
+  const correct =
+  questions[currentQuestion].words
+  .map(v=>v.text)
+  .join(" ");
+
+  const user =
+  selected
+  .map(v=>v.text)
+  .join(" ");
+
+  const result =
+  document.getElementById("result");
+
+  if(user === correct){
+
     score += 10;
-    document.getElementById('score').textContent = score;
-    resultEl.className = "result correct";
-    resultEl.textContent = "정답입니다!";
-    resultEl.style.display = 'block';
-    
-    setTimeout(() => {
-      if (currentQuestion < questions.length - 1) {
+
+    document.getElementById("score")
+    .textContent = score;
+
+    result.className =
+    "result correct";
+
+    result.innerHTML = `
+
+      <div class="result-title">
+        정답입니다!
+      </div>
+
+    `;
+
+    result.style.display = "block";
+
+    setTimeout(()=>{
+
+      if(
+        currentQuestion <
+        questions.length - 1
+      ){
+
         currentQuestion++;
+
         loadQuestion();
+
+      }else{
+
+        showFinal();
+
       }
-    }, 1400);
-  } else {
-    // ❌ 틀렸을 때 강렬 효과
-    document.body.style.background = '#991b1b';   // 전체 빨간색
-    launchConfetti();
-    
-    resultEl.className = "result wrong";
-    resultEl.innerHTML = `틀렸습니다!<br><span style="font-size:1.1rem; opacity:0.9;">정답: ${correctAnswer}</span>`;
-    resultEl.style.display = 'block';
-    
-    setTimeout(showHint, 900);
+
+    },1200);
+
+  }else{
+
+    document.body.style.background =
+    "#450a0a";
+
+    setTimeout(()=>{
+
+      document.body.style.background = `
+      radial-gradient(circle at top,#1d4ed8 0%,transparent 25%),
+      linear-gradient(135deg,#020617,#0f172a)
+      `;
+
+    },450);
+
+    result.className =
+    "result wrong";
+
+    result.innerHTML = `
+
+      <div class="result-title">
+        틀렸습니다
+      </div>
+
+      <div class="answer-text">
+        정답:<br>
+        ${correct}
+      </div>
+
+    `;
+
+    result.style.display = "block";
+
   }
+
 }
 
-function resetAnswer() {
-  loadQuestion();
+function updateProgressBar(){
+
+  const percent =
+  ((currentQuestion) /
+  questions.length) * 100;
+
+  document.getElementById("progressFill")
+  .style.width = percent + "%";
+
 }
 
-// 시작
+function resetAnswer(){
+
+  selected = [];
+
+  renderAnswerArea();
+  renderWordBank();
+
+}
+
+function showFinal(){
+
+  document.querySelector(".content")
+  .innerHTML = `
+
+    <div
+      style="
+      text-align:center;
+      padding:8% 4%;
+      "
+    >
+
+      <div
+        style="
+        font-size:3rem;
+        margin-bottom:1rem;
+        "
+      >
+        🎉
+      </div>
+
+      <h2
+        style="
+        font-size:2rem;
+        margin-bottom:1rem;
+        "
+      >
+        시험 완료
+      </h2>
+
+      <p
+        style="
+        color:#94a3b8;
+        margin-bottom:2rem;
+        "
+      >
+        최종 점수
+      </p>
+
+      <div
+        style="
+        font-size:4rem;
+        font-weight:800;
+        color:#67e8f9;
+        "
+      >
+        ${score}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+document.addEventListener("keydown",e=>{
+
+  if(e.key === "Enter"){
+
+    checkAnswer();
+
+  }
+
+});
+
 loadQuestion();
+
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"c6a34576229143bfb4afa85c5b5b0465","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+
 </body>
 </html>
